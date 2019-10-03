@@ -2,7 +2,7 @@ SampleAccessioningJob = Struct.new(:accessionable) do
   JobFailed = Class.new(StandardError)
 
   def perform
-    submission = Accession::Submission.new(User.find_by(api_key: configatron.accession_local_key), accessionable)
+    submission = Accession::Submission.new(User.sequencescape, accessionable)
     submission.post
     # update_sample_accession_details returns true if an accession has been supplied, and the sample has been saved.
     # If this returns false, then we fail the job. This should catch any failure situations

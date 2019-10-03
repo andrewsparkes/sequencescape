@@ -8,8 +8,6 @@ RSpec.describe Sample, type: :model, accession: true, aker: true do
   include MockAccession
 
   context 'accessioning' do
-    let!(:user) { create(:user, api_key: configatron.accession_local_key) }
-
     before do
       configatron.accession_samples = true
       Delayed::Worker.delay_jobs = false

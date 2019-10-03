@@ -16,8 +16,6 @@ RSpec.describe Study, type: :model, accession: true do
       allow(Accession::Request).to receive(:post).and_return(build(:successful_accession_response))
     end
 
-    let!(:user) { create(:user, api_key: configatron.accession_local_key) }
-
     after do
       Delayed::Worker.delay_jobs = true
       configatron.accession_samples = true
