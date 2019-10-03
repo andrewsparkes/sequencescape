@@ -77,7 +77,6 @@ class AccessionService
 
         xmldoc  = Document.new(xml_result)
         success = xmldoc.root.attributes['success']
-        accession_numbers = []
         # for some reasons, ebi doesn't give us back a accession number for the submission if it's a MODIFY action
         # therefore, we should be ready to get one or not
         number_generated = true
@@ -87,7 +86,6 @@ class AccessionService
             accession_number = acc.extract_accession_number(xmldoc)
             if accession_number
               acc.update_accession_number!(user, accession_number)
-              accession_numbers << accession_number
             else
               # error only, if one of the expected accessionable didn't get a AN
               # We don't care about the submission
