@@ -12,6 +12,8 @@ module Accession
       @code = response.code
       @body = response.body.to_s
 
+      Rails.logger.debug(body)
+
       if success?
         @xml = Nokogiri::XML::Document.parse(body)
       end
