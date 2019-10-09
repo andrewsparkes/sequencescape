@@ -31,7 +31,6 @@ RSpec.describe Sample, type: :model, accession: true, aker: true do
       allow_any_instance_of(RestClient::Resource).to receive(:post).and_return(successful_accession_response)
       sample = create(:sample_for_accessioning_with_open_study, sample_metadata: create(:sample_metadata_for_accessioning))
       expect(sample.sample_metadata.sample_ebi_accession_number).to be_present
-      expect(sample.sample_metadata.sample_common_name).to be_present
     end
 
     it 'will not add an accession number or common name if it fails' do

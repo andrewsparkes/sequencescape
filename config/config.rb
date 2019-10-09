@@ -16,6 +16,9 @@ configatron.accession do |accession|
   accession.ena.password = 'era_accession_password'
 end
 
+configatron.ebi_taxonomy_service.base.url = 'http://www.ebi.ac.uk/ena/data/taxonomy/v1/taxon/'
+configatron.ebi_taxonomy_service.opt.fetch_taxon_by_id = 'tax-id/'
+
 configatron.admin_email = 'admin@test.com'
 configatron.ssr_emails = ['ssr@example.com']
 
