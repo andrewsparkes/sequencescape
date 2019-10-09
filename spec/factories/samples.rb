@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :sample do
+  factory :sample, class: Sample do
     name { generate :sample_name }
 
     factory :sample_with_well do

@@ -75,9 +75,9 @@ module Accession
       sample.uuid
     end
 
-    def update_accession_details(details)
-      sample.sample_metadata.sample_ebi_accession_number = details['accession_number']
-      sample.sample_metadata.sample_common_name = details['common_name']
+    def update_sample_metadata(mdata)
+      sample.sample_metadata.sample_ebi_accession_number = mdata['accession_number'] if mdata['accession_number'].present?
+      sample.sample_metadata.sample_common_name = mdata['common_name'] if mdata['common_name'].present?
       sample.save
     end
 

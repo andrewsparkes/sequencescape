@@ -31,14 +31,7 @@ RSpec.describe Accession::Response, type: :model, accession: true do
   it 'has an accession number if accessioning has been successful' do
     response = described_class.new(successful_accession_response)
     expect(response).to be_accessioned
-    expect(response.accession_number).to eq('EGA00001000240')
-    expect(response.errors).not_to be_present
-  end
-
-  it 'has an common_name if accessioning has been successful' do
-    response = described_class.new(successful_accession_response)
-    expect(response).to be_accessioned
-    expect(response.common_name).to eq('Human')
+    expect(response.accession_number).to eq('ERS3798841')
     expect(response.errors).not_to be_present
   end
 
