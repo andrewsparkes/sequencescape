@@ -12,6 +12,14 @@ FactoryBot.define do
       response { MockTaxonLookup.successful_taxon_lookup_response }
     end
 
+    factory :successful_taxon_lookup_response_without_common_name do
+      response { MockTaxonLookup.successful_taxon_lookup_response_without_common_name }
+    end
+
+    factory :successful_taxon_lookup_response_unsubmittable do
+      response { MockTaxonLookup.successful_taxon_lookup_response_unsubmittable }
+    end
+
     factory :failed_taxon_lookup_response do
       response { MockTaxonLookup.failed_taxon_lookup_response }
     end

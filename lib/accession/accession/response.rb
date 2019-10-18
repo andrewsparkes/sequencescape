@@ -12,6 +12,7 @@ module Accession
       @code = response.code
       @body = response.body.to_s
 
+      Rails.logger.debug(code)
       Rails.logger.debug(body)
 
       if success?

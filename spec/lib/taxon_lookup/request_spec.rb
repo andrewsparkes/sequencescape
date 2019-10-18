@@ -52,7 +52,7 @@ RSpec.describe TaxonLookup::Request, type: :model do
       allow(request.resource).to receive(:get)
         .and_raise(StandardError)
 
-      expect(request.get).not_to be_success
+      expect(request.get).not_to be_successful
     end
 
     it 'returns a successful response if accessioning is successful' do
@@ -60,7 +60,7 @@ RSpec.describe TaxonLookup::Request, type: :model do
       allow(request.resource).to receive(:get)
         .and_return(successful_taxon_lookup_response)
 
-      expect(request.get).to be_success
+      expect(request.get).to be_successful
     end
 
     it 'returns a failure response if accessioning fails' do
@@ -68,7 +68,7 @@ RSpec.describe TaxonLookup::Request, type: :model do
       allow(request.resource).to receive(:get)
         .and_return(failed_taxon_lookup_response)
 
-      expect(request.get).not_to be_success
+      expect(request.get).not_to be_successful
     end
   end
 end

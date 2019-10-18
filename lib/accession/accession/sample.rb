@@ -20,7 +20,7 @@ module Accession
 
     attr_reader :standard_tags, :sample, :studies, :service, :tags
 
-    delegate :ebi_accession_number, :common_name, to: :sample
+    delegate :ebi_accession_number, to: :sample
 
     def initialize(standard_tags, sample)
       @standard_tags = standard_tags
@@ -75,9 +75,8 @@ module Accession
       sample.uuid
     end
 
-    def update_sample_metadata(mdata)
-      sample.sample_metadata.sample_ebi_accession_number = mdata['accession_number'] if mdata['accession_number'].present?
-      sample.sample_metadata.sample_common_name = mdata['common_name'] if mdata['common_name'].present?
+    def update_accession_number(accession_number)
+      sample.sample_metadata.sample_ebi_accession_number = accession_number
       sample.save
     end
 

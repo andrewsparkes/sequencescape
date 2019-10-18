@@ -17,29 +17,36 @@ module TaxonLookup
       Rails.logger.debug(code)
       Rails.logger.debug(body)
 
-      return unless success?
+      return unless successful?
 
       @taxon_details = JSON.parse(body)
     end
 
-    def success?
+    def successful?
       code.between?(200, 300)
     end
 
-    def failure?
+    def failed?
       code.between?(400, 600)
     end
 
     def common_name
-      return unless success?
+      return unless successful?
 
-      taxon_details['commonName']
+      # not all species have a common name, in these cases we fall back to the scientific name
+      taxon_details['commonName'].presence || taxon_details['scientificName']
+    end
+
+    def submittable?
+      return unless successful?
+
+      taxon_details['submittable'] == 'true'
     end
 
     def errors
-      return if success?
+      return ['Not Found'] if failed?
 
-      [body]
+      return ['Not Submittable'] if successful? && !submittable?
     end
   end
 end

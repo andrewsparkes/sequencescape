@@ -58,7 +58,7 @@ module Accession
     # Method called on successfully accessioning to set field on the Sample.
     def update_sample_accession_details
       if accessioned?
-        sample.update_sample_metadata('accession_number' => response.accession_number)
+        sample.update_accession_number(response.accession_number)
       end
     end
 

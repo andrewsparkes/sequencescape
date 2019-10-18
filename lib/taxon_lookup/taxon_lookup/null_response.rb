@@ -3,11 +3,11 @@
 module TaxonLookup
   # A null respons will be returned if taxon lookup errors.
   class NullResponse
-    def failure?
+    def failed?
       true
     end
 
-    def success?
+    def successful?
       false
     end
   end

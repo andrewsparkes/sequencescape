@@ -343,10 +343,6 @@ class Sample < ApplicationRecord
     sample_metadata.sample_ebi_accession_number
   end
 
-  def common_name
-    sample_metadata.sample_common_name
-  end
-
   def accession_number?
     ebi_accession_number.present?
   end

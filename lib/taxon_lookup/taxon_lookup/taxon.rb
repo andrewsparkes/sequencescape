@@ -8,7 +8,7 @@ module TaxonLookup
 
     attr_reader :taxon_id, :sample, :service, :response
 
-    delegate :success?, to: :response
+    delegate :successful?, :submittable?, to: :response
 
     validates_presence_of :taxon_id, :sample
 
@@ -27,7 +27,7 @@ module TaxonLookup
     end
 
     def update_sample_common_name
-      return unless success?
+      return unless successful? && submittable?
 
       @sample.sample_metadata.sample_common_name = response.common_name
       @sample.save!

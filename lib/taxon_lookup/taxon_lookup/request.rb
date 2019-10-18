@@ -18,6 +18,8 @@ module TaxonLookup
   #   "mitochondrialGeneticCode": "2",
   #   "submittable": "true"
   # }
+  # NB. A commonName may not always be available for a taxon, in which case we use scientificName.
+  # NB. The taxon may not be 'submittable', which likely indicates a mistake in setting the taxon Id by the user.
   class Request
     include ActiveModel::Validations
 

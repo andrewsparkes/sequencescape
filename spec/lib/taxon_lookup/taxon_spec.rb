@@ -43,13 +43,56 @@ RSpec.describe TaxonLookup::Taxon, type: :model do
         taxon.get
       end
 
-      it 'returns an appropriate response' do
-        expect(taxon).to be_success
+      it 'sets the taxon success flag appropriately' do
+        expect(taxon).to be_successful
+      end
+
+      it 'sets the taxon submittable flag appropriately' do
+        expect(taxon).to be_submittable
       end
 
       it 'can update sample common name' do
         taxon.update_sample_common_name
         expect(taxon.sample.sample_metadata.sample_common_name).to eq('human')
+      end
+    end
+
+    context 'when successful but common name not available' do
+      before do
+        allow(TaxonLookup::Request).to receive(:get)
+          .with(taxon)
+          .and_return(build(:successful_taxon_lookup_response_without_common_name))
+        taxon.get
+      end
+
+      it 'sets the taxon success flag appropriately' do
+        expect(taxon).to be_successful
+      end
+
+      it 'sets the taxon submittable flag appropriately' do
+        expect(taxon).to be_submittable
+      end
+
+      it 'can update sample common name' do
+        taxon.update_sample_common_name
+        expect(taxon.sample.sample_metadata.sample_common_name).to eq('Streptococcus pneumoniae')
+      end
+    end
+
+    context 'when successful but unsubmittable' do
+      before do
+        allow(TaxonLookup::Request).to receive(:get)
+          .with(taxon)
+          .and_return(build(:successful_taxon_lookup_response_unsubmittable))
+        taxon.get
+      end
+
+      it 'sets the taxon success flag appropriately' do
+        expect(taxon).to be_successful
+      end
+
+      it 'sets the taxon submittable flag appropriately' do
+        expect(taxon).not_to be_submittable
       end
     end
 
@@ -59,8 +102,8 @@ RSpec.describe TaxonLookup::Taxon, type: :model do
         taxon.get
       end
 
-      it 'returns an appropriate response' do
-        expect(taxon).not_to be_success
+      it 'sets the taxon success flag appropriately' do
+        expect(taxon).not_to be_successful
       end
     end
   end
